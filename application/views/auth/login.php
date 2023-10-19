@@ -201,7 +201,7 @@
             <div class="container">
                 <img style="display: block; margin-left: auto; margin-right: auto;" src="http://localhost:8000/assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
                 <div class="text-center pb-5" style="font-size: 13px;">
-                    © PT.Mahadaya Swara Teknologi <br />
+                    © Hisuara.id <br />
                     All Right Reserved 2021
                 </div>
             </div>
