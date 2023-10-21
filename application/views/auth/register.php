@@ -108,7 +108,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-9">
                     <div class="text-center">
-                        <img src="<?= base_url('') ?>assets/images/hisuara.png" class="header-brand-img" style="height:100px;width:auto">
+                        <img src="<?= base_url('') ?>assets/images/hisuara.png" class="header-brand-img" style="height:130px;width:auto">
                     </div>
                 </div>
                 <div class="container mt-3 mb-7">
@@ -121,42 +121,42 @@
                                         <span class="login100-form-title">
                                             Registration
                                         </span>
-                                        <?php if( $this->session->flashdata('error')): ?>
+                                        <?php if ($this->session->flashdata('error')) : ?>
                                             <div class="alert alert-damger alert-dismissible fade show" role="alert">
-                                            <?= $this->session->flashdata('error') ?>
+                                                <?= $this->session->flashdata('error') ?>
                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>
-                                            <?php endif?>
-                                        <?php if( $this->session->userdata('response')): ?>
-                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                <?php 
-                                                $response = json_decode($this->session->userdata('response'),true); 
+                                        <?php endif ?>
+                                        <?php if ($this->session->userdata('response')) : ?>
+                                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <?php
+                                                $response = json_decode($this->session->userdata('response'), true);
                                                 ?>
-                                                
-                                                <?php if (isset($response['message'])): ?>
-                                                   <ul>
-                                                    <li>
-                                                        <?=$response['message']?>
-                                                    </li>
-                                                   </ul>
-                                                <?php else: ?>
-                                                <ul>
-                                                    <?php foreach($response['errors']as $field => $messages): ?>
-                                                        <?php foreach($messages as $message): ?>
-                                                            <li>
-                                                                <?= $message?>
-                                                            </li>
-                                                            <?php endforeach?>
-                                                           
-    
-                                                    <?php endforeach; ?>
-                                                </ul>
+
+                                                <?php if (isset($response['message'])) : ?>
+                                                    <ul>
+                                                        <li>
+                                                            <?= $response['message'] ?>
+                                                        </li>
+                                                    </ul>
+                                                <?php else : ?>
+                                                    <ul>
+                                                        <?php foreach ($response['errors'] as $field => $messages) : ?>
+                                                            <?php foreach ($messages as $message) : ?>
+                                                                <li>
+                                                                    <?= $message ?>
+                                                                </li>
+                                                            <?php endforeach ?>
+
+
+                                                        <?php endforeach; ?>
+                                                    </ul>
                                                 <?php endif; ?>
-                                                
-                                                <button type="button" class="btn-close"id="btn-close" data-bs-dismiss="alert" aria-label="Close"> X </button>
+
+                                                <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="alert" aria-label="Close"> X </button>
                                             </div>
                                         <?php endif; ?>
-                                            
+
                                         <div class="wrap-input100 validate-input">
                                             <input class="input100" type="text" name="nik" placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)" maxlength="16" autocomplete="nik">
                                             <span class="focus-input100"></span>
@@ -209,6 +209,18 @@
 
 
                                         <div class="form-group">
+                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="role" id="Role" tabindex="-1" aria-hidden="true">
+                                                <option selected disabled>Pilih Role</option>
+                                                <option value="tps|8">Saksi</option>
+                                                <option value="tdk|2">Verifikator</option>
+                                                <option value="tdk|16">Enumerator</option>
+                                                <option value="tdk|3">Auditor</option>
+                                                <option value="tdk|9">Rekapitulator</option>
+                                                <option value="tps|14">Relawan</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
                                             <select class="form-control select2-show-search form-select select2-hidden-accessible" name="provinsi" id="Provinsi" tabindex="-1" aria-hidden="true">
                                                 <option selected disabled>Pilih Provinsi</option>
                                                 <?php foreach ($provinsi as $prov) : ?>
@@ -224,24 +236,27 @@
 
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kecamatan" id="Kecamatan" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih Kecamatan</option>
+
+                                        <div id="roles">
+                                            <div class="form-group">
+                                                <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kecamatan" id="Kecamatan" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled>Pilih Kecamatan</option>
 
 
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kelurahan" id="Kelurahan" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih Kelurahan / Desa</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kelurahan" id="Kelurahan" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled>Pilih Kelurahan / Desa</option>
 
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="tps" id="tps" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih TPS</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control select2-show-search form-select select2-hidden-accessible" name="tps" id="tps" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled>Pilih TPS</option>
 
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
 
 
@@ -251,7 +266,7 @@
                                             </button>
                                         </div>
                                         <div class="text-center pt-3">
-                                            <p class="text-dark mb-0">Already have account?<a href="<?=base_url('auth/')?>" class="text-primary ms-1">Sign In</a></p>
+                                            <p class="text-dark mb-0">Already have account?<a href="<?= base_url('auth/') ?>" class="text-primary ms-1">Sign In</a></p>
                                         </div>
                                     </form>
                                 </div>
@@ -323,6 +338,17 @@
 
 
     <script>
+        $('#Role').on('change', function() {
+            let cekTps = $(this).val().split("|");
+            if (cekTps[0] == "tps") {
+                // console.log("hai")
+                $('#roles').show();
+            } else {
+                $('#roles').hide();
+                // console.log("halo")
+            }
+        });
+
         $('#Provinsi').on('change', function() {
             let idProvinsi = $(this).val();
             // console.log(idProvinsi)
@@ -390,9 +416,8 @@
             $.ajax({
                 url: '<?= base_url() ?>auth/btnClose',
                 method: 'post',
-             
-                success: function(response) {
-                }
+
+                success: function(response) {}
 
             });
         })

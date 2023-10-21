@@ -108,7 +108,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto">
                     <div class="text-center">
-                        <img src="<?= base_url('') ?>assets/images/hisuara.png" class="img-fluid img-thumbnail bg-dark shadow-lg border-0" style="width:100px;height:auto;" alt="">
+                        <img src="<?= base_url('') ?>assets/images/hisuara.png" class="img-fluid img-thumbnail bg-dark shadow-lg border-0" style="width:130px;height:auto;" alt="">
                     </div>
                 </div>
                 <div class="container-login100 d-flex">

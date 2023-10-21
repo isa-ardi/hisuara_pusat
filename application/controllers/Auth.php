@@ -31,42 +31,65 @@ class Auth extends CI_Controller
                 redirect(base_url("") . "auth/register");
                 return true;
             }
-
-
-
-
             $this->db->select('*');
             $this->db->from('kabupaten');
             $this->db->where('id_kab', $this->input->post('kota'));
             $kota = $this->db->get()->row();
+            $role = explode('|',$this->input->post('role'));
+            
+            if ($role[0] == "tps") {
+                
+                $api_url = $kota->subdomain . '/api/public/register-saksi-pusat'; // Ganti dengan URL API yang sesuai
+            //   var_dump($role[0]);die;
+            }else{
+                // var_dump("anjas");die;
 
-            $api_url = $kota->subdomain . '/api/public/register-saksi-pusat'; // Ganti dengan URL API yang sesuai
+                $api_url = $kota->subdomain . '/api/public/register-admin-pusat'; // Ganti dengan URL API yang sesuai
+            }
+
+
             $bearer_token = '123789'; // Ganti dengan token Bearer yang valid
-
-            $data = array(
-                'name' => $this->input->post('name'), // OK
-                'address' => $this->input->post('alamat'), // OK
-                'no_hp' => $this->input->post('no_hp'), // OK
-                'districts' => $this->input->post('kecamatan'), // OK
-                'villages' => $this->input->post('kelurahan'), // OK
-                'role_id' => "8", // OK
-                'is_active' => "1", // OK
-                'email' => $this->input->post('email'), // OK
-                'password' => $this->input->post('password'), // OK
-                'tps_id' => $this->input->post('tps'), // OK
-                'cek' => "0", // OK
-                'absen' => "hadir", // OK
-                'nik' => $this->input->post('nik'), // OK
-
-                // tambahkan parameter lainnya sesuai kebutuhan 
-            );
-            // var_dump($this->input->post());
-
+            $data = [];
+            if($role[0] == "tps"){
+                $data = array(
+                    'name' => $this->input->post('name'), // OK
+                    'address' => $this->input->post('alamat'), // OK
+                    'no_hp' => $this->input->post('no_hp'), // OK
+                    'districts' => $this->input->post('kecamatan'), // OK
+                    'villages' => $this->input->post('kelurahan'), // OK
+                    'role_id' => $role[1], // OK
+                    'is_active' => "0", // OK
+                    'email' => $this->input->post('email'), // OK
+                    'password' => $this->input->post('password'), // OK
+                    'tps_id' => $this->input->post('tps'), // OK
+                    'cek' => "0", // OK
+                    'absen' => "hadir", // OK
+                    'nik' => $this->input->post('nik'), // OK   
+                    // tambahkan parameter lainnya sesuai kebutuhan 
+                );
+            }else{
+                $data = array(
+                    'name' => $this->input->post('name'), // OK
+                    'address' => $this->input->post('alamat'), // OK
+                    'no_hp' => $this->input->post('no_hp'), // OK
+                    // 'districts' => $this->input->post('kecamatan'), // OK
+                    // 'villages' => $this->input->post('kelurahan'), // OK
+                    'role_id' => explode('|',$this->input->post('role'))[1], // OK
+                    'is_active' => "1", // OK
+                    'email' => $this->input->post('email'), // OK
+                    'password' => $this->input->post('password'), // OK
+                    // 'tps_id' => $this->input->post('tps'), // OK
+                    'cek' => "0", // OK
+                    'absen' => "hadir", // OK
+                    'nik' => $this->input->post('nik'), // OK
+                    // tambahkan parameter lainnya sesuai kebutuhan 
+                );
+            }
+            
+        
             $ch = curl_init($api_url);
 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization: Bearer ' . $bearer_token
-            ));
+       
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
             // Mengatur permintaan sebagai POST
@@ -92,6 +115,7 @@ class Auth extends CI_Controller
 
 
             curl_close($ch);
+            // var_dump($result);die;
             if ($httpCode == 402) {
                 // Di dalam controller atau di mana pun yang sesuai
                 //SELECT * FROM `users` WHERE `name` LIKE "%hisu%"
@@ -102,11 +126,13 @@ class Auth extends CI_Controller
                 // Kemudian lakukan redirect kembali ke halaman sebelumnya
                 redirect(base_url("") . "auth/register");
             }
+
             $this->session->set_userdata('response', $result);
 
             // Kemudian lakukan redirect kembali ke halaman sebelumnya
             redirect(base_url("") . "auth/register");
         }
+        
     }
 
 
