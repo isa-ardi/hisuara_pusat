@@ -81,16 +81,16 @@ $db['default'] = array(
 	// 'database' => 'kartuson_hisuara_pusat',
 
 
-	'hostname' => 'localhost',
-		'username' => 'root',
-		'password' => '',
-		'database' => 'hisuara_pusat',
-
-
 	// 'hostname' => 'localhost',
-	// 	'username' => 'hisuarai',
-	// 	'password' => 'lJ4h82.j*MKv1M',
-	// 	'database' => 'hisuarai_hisuara',
+	// 	'username' => 'root',
+	// 	'password' => '',
+	// 	'database' => 'hisuara_pusat',
+
+
+	'hostname' => 'localhost',
+		'username' => 'hisuarai',
+		'password' => 'lJ4h82.j*MKv1M',
+		'database' => 'hisuarai_hisuara',
 
 
 

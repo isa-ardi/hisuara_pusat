@@ -12,6 +12,7 @@ class Auth extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('user_agent');
         $this->load->database();
+        
     }
 
 
@@ -272,13 +273,57 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
         $id_kota = $this->input->post('kota');
         $kota = $this->db->where('id_kab',$id_kota)->get("kabupaten")->row();
-        // $key = "12345";
-        // $iv = openssl_random_pseudo_bytes(16);
         
-        if ($kota != null) {
-            header("Location: "."https://".$kota->subdomain."/otentifikasi-login?al=".base64_encode($email)."&pa=".base64_encode($password));
+
+        if ($this->input->post()) {
+        
+
+            $url = $kota->subdomain . '/api/login-cek?email='.$email."&password=".$password; // Ganti dengan URL API yang sesuai
+            // Data yang akan Anda kirim dalam permintaan POST
+
+            $ch = curl_init($url);
+
+            // Atur opsi cURL
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Mengembalikan respons ke variabel
+
+            // Eksekusi permintaan cURL
+            $response = curl_exec($ch);
+
+            // Cek apakah permintaan berhasil
+            if ($response === false) {
+                die('Kesalahan cURL: ' . curl_error($ch));
+            }
+
+            // Tutup koneksi cURL
+            curl_close($ch);
+
+            // $response = json_encode($response, true); // 
+
+            $response =  json_decode($response);
+
+            
+
+            if ($response->message == "gagal") {
+
+                $this->session->set_flashdata('error', 'Email atau password anda salah');
+    
+                redirect('daerah/loginPages');
+                // echo "gagal";
+            }else{
+            
+                header("Location: "."https://".$kota->subdomain."/otentifikasi-login?al=".base64_encode($email)."&pa=".base64_encode($password));
+                
+                // echo "berhasil";
+            }
+            
         }
-    }
+
+
+        
+       
+    }   
+
+
 
 //    private function encrypt($data, $key, $iv) {
 //         $cipher = "aes-256-cbc";

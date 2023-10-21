@@ -118,12 +118,14 @@
                                 <input type="hidden" name="_token" value="pdeCGUJuHZKZH9C8W40OyrzCco8oGzawGBZ1hDqF">
                                 <input type="hidden" id="latitude" name="latitude">
                                 <input type="hidden" id="longitude" name="longitude">
+
+
                                 <span class="login100-form-title">
                                     Login
                                 </span>
-                                <div class="alert alert-success" id="kodeAlert" style="display:none">
-                                    Berhasil Generate kode akses, Silahkan cek Email Anda.
-                                </div>
+                                <?php if ($this->session->flashdata('error')) { ?>
+                                    <div class="alert alert-danger"><?= $this->session->flashdata('error') ?></div>
+                                <?php } ?>
 
 
                                 <div class="wrap-input100 validate-input">
@@ -221,7 +223,7 @@
     <script src="<?= base_url('') ?>assets/assets_login/plugins/multipleselect/multiple-select.js"></script>
     <script src="<?= base_url('') ?>assets/assets_login/plugins/multipleselect/multi-select.js"></script>
     <script>
-          $('#Provinsi').on('change', function() {
+        $('#Provinsi').on('change', function() {
             let idProvinsi = $(this).val();
             // console.log(idProvinsi)
             $.ajax({
