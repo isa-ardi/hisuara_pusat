@@ -143,14 +143,14 @@ class Auth extends CI_Controller
 
     function getKota()
     {
-        if ($this->input->post()) {
+    
             # code...
             $this->db->select('*');
             $this->db->from('kabupaten');
             $this->db->where('id_prov', $this->input->post('idProvinsi'));
             $data['kota'] = $this->db->get()->result();
             $this->load->view("auth/getKota", $data);
-        }
+     
     }
 
     function getKec()
@@ -266,4 +266,32 @@ class Auth extends CI_Controller
         $kota = $this->db->get()->row();
         return $kota;
     }
+
+    function action_login() {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $id_kota = $this->input->post('kota');
+        $kota = $this->db->where('id_kab',$id_kota)->get("kabupaten")->row();
+        // $key = "12345";
+        // $iv = openssl_random_pseudo_bytes(16);
+        
+        if ($kota != null) {
+            header("Location: "."https://".$kota->subdomain."/otentifikasi-login?al=".base64_encode($email)."&pa=".base64_encode($password));
+        }
+    }
+
+//    private function encrypt($data, $key, $iv) {
+//         $cipher = "aes-256-cbc";
+//         $options = OPENSSL_RAW_DATA;
+//         $encrypted = openssl_encrypt($data, $cipher, $key, $options, $iv);
+//         return base64_encode($encrypted);
+//     }
+
+//     private function decrypt($data, $key, $iv) {
+//         $cipher = "aes-256-cbc";
+//         $options = OPENSSL_RAW_DATA;
+//         $decrypted = openssl_decrypt(base64_decode($data), $cipher, $key, $options, $iv);
+//         return $decrypted;
+//     }
+
 }

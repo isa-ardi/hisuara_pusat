@@ -147,8 +147,6 @@
                                         <?php foreach ($provinsi as $prov) : ?>
                                             <option value="<?= $prov->id_prov ?>"><?= $prov->nama ?></option>
                                         <?php endforeach ?>
-
-
                                     </select>
                                 </div>
                                 <div class="form-group">
