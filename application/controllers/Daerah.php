@@ -40,7 +40,8 @@ class Daerah extends CI_Controller
 
 	
 	function loginPages() {
-		$this->load->view('auth/login');
+		$data['provinsi'] = $this->db->get('provinsi')->result();
+		$this->load->view('auth/login',$data);
 	}
 
 

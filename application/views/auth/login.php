@@ -98,7 +98,7 @@
 
         <!-- GLOABAL LOADER -->
         <div id="global-loader">
-            <img src="<?=base_url('')?>assets/images/loader.svg" class="loader-img" alt="Loader">
+            <img src="<?= base_url('') ?>assets/images/loader.svg" class="loader-img" alt="Loader">
         </div>
         <!-- /GLOABAL LOADER -->
 
@@ -108,14 +108,15 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto">
                     <div class="text-center">
-                        <img src="<?=base_url('')?>assets/images/hisuara.png" class="img-fluid img-thumbnail bg-dark shadow-lg border-0" style="width:100px;height:auto;" alt="">
+                        <img src="<?= base_url('') ?>assets/images/hisuara.png" class="img-fluid img-thumbnail bg-dark shadow-lg border-0" style="width:100px;height:auto;" alt="">
                     </div>
                 </div>
                 <div class="container-login100 d-flex">
                     <div class="wrap-login100 p-0">
                         <div class="card-body">
-                            <form class="login100-form validate-form" method="POST" action="<?=base_url('')?>login">
-                                <input type="hidden" name="_token" value="pdeCGUJuHZKZH9C8W40OyrzCco8oGzawGBZ1hDqF"> <input type="hidden" id="latitude" name="latitude">
+                            <form class="login100-form validate-form" method="POST" action="<?= base_url('') ?>auth/action_login">
+                                <input type="hidden" name="_token" value="pdeCGUJuHZKZH9C8W40OyrzCco8oGzawGBZ1hDqF">
+                                <input type="hidden" id="latitude" name="latitude">
                                 <input type="hidden" id="longitude" name="longitude">
                                 <span class="login100-form-title">
                                     Login
@@ -124,8 +125,9 @@
                                     Berhasil Generate kode akses, Silahkan cek Email Anda.
                                 </div>
 
+
                                 <div class="wrap-input100 validate-input">
-                                    <input class="input100" type="text" name="email" placeholder="Masukkan No. KTP/No. Hp/Email" required>
+                                    <input class="input100" type="email" name="email" placeholder="Masukkan No. KTP/No. Hp/Email" required>
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
                                         <i class="zmdi zmdi-email" aria-hidden="true"></i>
@@ -139,43 +141,24 @@
                                         <i class="zmdi zmdi-lock" aria-hidden="true"></i>
                                     </span>
                                 </div>
-                                <center>
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select select2-hidden-accessible" name="provinsi" id="Provinsi" tabindex="-1" aria-hidden="true">
+                                        <option selected disabled>Pilih Provinsi</option>
+                                        <?php foreach ($provinsi as $prov) : ?>
+                                            <option value="<?= $prov->id_prov ?>"><?= $prov->nama ?></option>
+                                        <?php endforeach ?>
 
 
-
-
-                                    <!-- <div class="wrap-input100 validate-input">
-                                        <div class="otp-input-wrapper">
-                                            <input type="text" maxlength="6" pattern="[0-9]*" autocomplete="off"
-                                                name="acakey" required>
-                                            <svg viewBox="0 0 240 2" xmlns="http://www.w3.org/2000/svg">
-                                                <line x1="0" y1="0" x2="400" y2="1" stroke="#3e3e3e" stroke-width="2"
-                                                    stroke-dasharray="20" />
-                                            </svg>
-                                        </div>
-                                    </div> -->
-                                    <div class="col-lg-12">
-                                        <p class="containerTime text-danger text-center">
-
-                                        </p>
-                                    </div>
-                                    <!-- <div class="container-login100-form-btn">
-                                        <button class="login100-form-btn btn-danger text-white p-1 mt-2" id="pengajuan">
-                                            <img src="http://localhost:8000/assets/acakey_new_icon_key.png"
-                                                style="width:20px;height:auto;">&nbsp;
-                                            Get Kode ACA
-                                        </button>
-                                    </div> -->
-                                </center>
-
-                                <div class="row justify-content-end">
-                                    <!-- <div class="col-6">
-                                        <a href="https://www.acakey.com/info" class="text-primary ms-1">Apa Itu Acakey?</a>
-                                    </div> -->
-                                    <!-- <div class="col-6 text-end">
-                                        <a href="#" class="text-primary ms-1">Forgot Password?</a>
-                                    </div> -->
+                                    </select>
                                 </div>
+                                <div class="form-group">
+                                    <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kota" id="Kota" tabindex="-1" aria-hidden="true">
+                                        <option selected disabled>Pilih Kota</option>
+
+                                    </select>
+                                </div>
+
+
 
                                 <div class="container-login100-form-btn">
                                     <button type="submit" class="login100-form-btn" style="background-color: #6c757d!important;color:white">
@@ -183,7 +166,7 @@
                                     </button>
                                 </div>
                                 <div class="text-center pt-3">
-                                    <p class="text-dark mb-0">Not a member?<a href="<?=base_url('')?>auth/register" class="text-primary ms-1">Create an Account</a></p>
+                                    <p class="text-dark mb-0">Not a member?<a href="<?= base_url('') ?>auth/register" class="text-primary ms-1">Create an Account</a></p>
                                 </div>
                             </form>
                         </div>
@@ -217,6 +200,9 @@
 
 
     <!-- CHART-CIRCLE JS -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
     <script src="<?= base_url('') ?>assets/assets_login/js/circle-progress.min.js"></script>
 
     <!-- Perfect SCROLLBAR JS-->
@@ -236,6 +222,26 @@
     <!-- MULTI SELECT JS-->
     <script src="<?= base_url('') ?>assets/assets_login/plugins/multipleselect/multiple-select.js"></script>
     <script src="<?= base_url('') ?>assets/assets_login/plugins/multipleselect/multi-select.js"></script>
+    <script>
+          $('#Provinsi').on('change', function() {
+            let idProvinsi = $(this).val();
+            // console.log(idProvinsi)
+            $.ajax({
+                url: '<?= base_url() ?>auth/getKota',
+                method: 'post',
+                data: {
+                    idProvinsi: idProvinsi
+                },
+                type: "post",
+                success: function(response) {
+                    $('#Kota').html("")
+                    $('#Kota').html(response);
+                    // console.log(response)
+                }
+
+            });
+        })
+    </script>
 </body>
 
 </html>
