@@ -31,6 +31,14 @@ class Auth extends CI_Controller
                 redirect(base_url("") . "auth/register");
                 return true;
             }
+
+            if ($this->input->post("role") == null) {
+                $this->session->set_flashdata('error', 'Input Role wajib di isi');
+                redirect(base_url("") . "auth/register");
+                return true;
+            }
+
+
             $this->db->select('*');
             $this->db->from('kabupaten');
             $this->db->where('id_kab', $this->input->post('kota'));
