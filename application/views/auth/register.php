@@ -157,6 +157,20 @@
                                             </div>
                                         <?php endif; ?>
 
+                                        <div class="form-group">
+                                      
+                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="role" id="role" tabindex="-1" aria-hidden="true">
+                                                <option selected>Pilih Role</option>
+                                                <option value="tps|8">Saksi</option>
+                                                <option value="tdk|2">Verifikator</option>
+                                                <option value="tdk|16">Enumerator</option>
+                                                <option value="tdk|3">Auditor</option>
+                                                <option value="tdk|9">Rekapitulator</option>
+                                                <option value="tps|14">Relawan</option>
+                                            </select>
+                                        </div>
+
+
                                         <div class="wrap-input100 validate-input">
                                             <input class="input100" type="text" name="nik" placeholder="Masukkan Nomor Induk Kependudukan (No. KTP)" maxlength="16" autocomplete="nik">
                                             <span class="focus-input100"></span>
@@ -208,17 +222,8 @@
                                         </div>
 
 
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="role" id="Role" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih Role</option>
-                                                <option value="tps|8">Saksi</option>
-                                                <option value="tdk|2">Verifikator</option>
-                                                <option value="tdk|16">Enumerator</option>
-                                                <option value="tdk|3">Auditor</option>
-                                                <option value="tdk|9">Rekapitulator</option>
-                                                <option value="tps|14">Relawan</option>
-                                            </select>
-                                        </div>
+                                    
+                                    <div id="role-admin"style="display:none">
 
                                         <div class="form-group">
                                             <select class="form-control select2-show-search form-select select2-hidden-accessible" name="provinsi" id="Provinsi" tabindex="-1" aria-hidden="true">
@@ -236,8 +241,9 @@
 
                                             </select>
                                         </div>
-
-                                        <div id="roles">
+                                    </div>
+                                                    
+                                        <div id="role-saksi"style="display:none">
                                             <div class="form-group">
                                                 <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kecamatan" id="Kecamatan" tabindex="-1" aria-hidden="true">
                                                     <option selected disabled>Pilih Kecamatan</option>
@@ -270,27 +276,15 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="card-footer">
-                                    <div class="d-flex justify-content-center my-3">
-                                        <a href="" class="social-login  text-center me-4">
-                                            <i class="fa fa-google"></i>
-                                        </a>
-                                        <a href="" class="social-login  text-center me-4">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a href="" class="social-login  text-center">
-                                            <i class="fa fa-whatsapp"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                              
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <section class="bg-light" style="height: 10px;">
-                    <div class="container">
-                        <img style="display: block; margin-left: auto; margin-right: auto;" src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
+                <section class="bg-light">
+                    <div class="container pt-5">
+                        <!-- <img style="display: block; margin-left: auto; margin-right: auto;" src="../../assets/images/acakey_new.png" width="250px" class="pt-5 mb-5"> -->
                         <div class="text-center pb-5" style="font-size: 13px;">
                             © Hisuara.id <br />
                             All Right Reserved 2021
@@ -338,14 +332,21 @@
 
 
     <script>
-        $('#Role').on('change', function() {
+        $('#role').on('change', function() {
             let cekTps = $(this).val().split("|");
             if (cekTps[0] == "tps") {
                 // console.log("hai")
-                $('#roles').show();
-            } else {
-                $('#roles').hide();
+                $('#role-admin').show(100);
+                $('#role-saksi').show(100);
+            } else if (cekTps[0] == "tdk") {
+                $('#role-admin').show(100);
+                $('#role-saksi').hide(100);
+                
                 // console.log("halo")
+            }else{
+                $('#role-admin').hide(100);
+                $('#role-saksi').hide(100);
+
             }
         });
 

@@ -180,9 +180,9 @@
                 <!-- CONTAINER CLOSED -->
             </div>
         </div>
-        <section class="bg-light" style="height: 10px;">
-            <div class="container">
-                <img style="display: block; margin-left: auto; margin-right: auto;" src="http://localhost:8000/assets/images/acakey_new.png" width="250px" class="pt-5 mb-5">
+        <section class="bg-light">
+            <div class="container pt-5">
+                <!-- <img style="display: block; margin-left: auto; margin-right: auto;" src="http://localhost:8000/assets/images/acakey_new.png" width="250px" class="pt-5 mb-5"> -->
                 <div class="text-center pb-5" style="font-size: 13px;">
                     © Hisuara.id <br />
                     All Right Reserved 2021
