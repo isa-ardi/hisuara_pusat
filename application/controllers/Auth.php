@@ -56,7 +56,37 @@ class Auth extends CI_Controller
             }
 
 
+            $config['upload_path'] = './uploads/'; // Ubah sesuai dengan path penyimpanan yang sesuai
+            $config['allowed_types'] = 'jpg|jpeg|png|gif';
+            $config['max_size'] = 5048; // Ukuran maksimum dalam kilobyte
+    
+            $this->load->library('upload', $config);
+
+            $pathFotoKtp = "";
+            $pathFotoProfil = "";
+            if ($this->upload->do_upload('foto_ktp')) {
+                $data = $this->upload->data();
+                $pathFotoKtp = 'uploads/' . $data['file_name']; 
+            }else{
+                $error = $this->upload->display_errors();
+                redirect('auth/register');
+            }
+
+            if ($this->upload->do_upload('foto_profil')) {
+                $data = $this->upload->data();
+                $pathFotoProfil = 'uploads/' . $data['file_name']; 
+            }else{
+                $error = $this->upload->display_errors();
+                redirect('auth/register');
+            }
+
+
+
+
+
             $bearer_token = '123789'; // Ganti dengan token Bearer yang valid
+
+          
             $data = [];
             if($role[0] == "tps"){
                 $data = array(
@@ -73,6 +103,9 @@ class Auth extends CI_Controller
                     'cek' => "0", // OK
                     'absen' => "hadir", // OK
                     'nik' => $this->input->post('nik'), // OK   
+                    "foto_ktp"=> new CURLFile($pathFotoKtp),
+                    "foto_profil"=> new CURLFile($pathFotoProfil),
+
                     // tambahkan parameter lainnya sesuai kebutuhan 
                 );
             }else{
@@ -90,6 +123,10 @@ class Auth extends CI_Controller
                     'cek' => "0", // OK
                     'absen' => "hadir", // OK
                     'nik' => $this->input->post('nik'), // OK
+                    "foto_ktp"=> new CURLFile($pathFotoKtp),
+                    "foto_profil"=> new CURLFile($pathFotoProfil),
+                    
+
                     // tambahkan parameter lainnya sesuai kebutuhan 
                 );
             }
@@ -135,6 +172,17 @@ class Auth extends CI_Controller
                 redirect(base_url("") . "auth/register");
             }
 
+
+
+            if (file_exists($pathFotoProfil)) {
+                unlink($pathFotoProfil);
+            }
+
+            if (file_exists($pathFotoKtp)) {
+                unlink($pathFotoKtp);
+            }
+
+
             $this->session->set_userdata('response', $result);
 
             // Kemudian lakukan redirect kembali ke halaman sebelumnya
@@ -142,6 +190,9 @@ class Auth extends CI_Controller
         }
         
     }
+
+
+
 
 
 
@@ -200,6 +251,7 @@ class Auth extends CI_Controller
             $url = $kota->subdomain . '/api/public/get-district?id=' . $kota->id_kab; // Ganti dengan URL API yang sesuai
             // Data yang akan Anda kirim dalam permintaan POST
 
+        
             $ch = curl_init($url);
 
             // Atur opsi cURL

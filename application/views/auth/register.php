@@ -83,6 +83,48 @@
             height: 2px;
         }
     </style>
+    <style>
+    .picture___input {
+      display: none;
+    }
+
+    .picture {
+      width: 300px;
+      aspect-ratio: 16/9;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      border: 2px dashed currentcolor;
+      cursor: pointer;
+      font-family: sans-serif;
+      transition: color 300ms ease-in-out, background 300ms ease-in-out;
+      outline: none;
+      overflow: hidden;
+    }
+
+    .picture:hover {
+      color: #777;
+      background: #ccc;
+    }
+
+    .picture:active {
+      border-color: turquoise;
+      color: turquoise;
+      background: #eee;
+    }
+
+    .picture:focus {
+      color: #777;
+      background: #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .picture__img {
+      max-width: 100%;
+    }
+  </style>
 </head>
 
 <body class="">
@@ -117,7 +159,7 @@
                             <div class="wrap-login100 p-0">
 
                                 <div class="card-body">
-                                    <form class="justify-content-center validate-form" method="POST" action="<?= base_url() ?>auth/daftar">
+                                    <form class="justify-content-center validate-form" method="POST" action="<?= base_url() ?>auth/daftar"enctype="multipart/form-data">
                                         <span class="login100-form-title">
                                             Registration
                                         </span>
@@ -141,7 +183,7 @@
                                                     </ul>
                                                 <?php else : ?>
                                                     <ul>
-                                                        <?php foreach ($response['errors'] as $field => $messages) : ?>
+                                                    <?php foreach ($response['errors'] as $field => $messages) : ?>
                                                             <?php foreach ($messages as $message) : ?>
                                                                 <li>
                                                                     <?= $message ?>
@@ -158,14 +200,13 @@
                                         <?php endif; ?>
 
                                         <div class="form-group">
-                                      
                                             <select class="form-control select2-show-search form-select select2-hidden-accessible" name="role" id="role" tabindex="-1" aria-hidden="true">
                                                 <option selected>Pilih Role</option>
                                                 <option value="tps|8">Saksi</option>
-                                                <option value="tdk|2">Verifikator</option>
+                                                <option value="tdk|1">Admin</option>
                                                 <option value="tdk|16">Enumerator</option>
-                                                <option value="tdk|3">Auditor</option>
-                                                <option value="tdk|9">Rekapitulator</option>
+                                                <!-- <option value="tdk|3">Auditor</option>
+                                                <option value="tdk|9">Rekapitulator</option> -->
                                                 <option value="tps|14">Relawan</option>
                                             </select>
                                         </div>
@@ -221,29 +262,48 @@
                                             </span>
                                         </div>
 
+                                        <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                            <label class="form-label mt-3">Upload Foto Ktp</label>
+                                            <label class="picture" for="picture__input" tabIndex="0">
+                                                <span class="picture__image"></span>
+                                            </label>
 
-                                    
-                                    <div id="role-admin"style="display:none">
-
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="provinsi" id="Provinsi" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih Provinsi</option>
-                                                <?php foreach ($provinsi as $prov) : ?>
-                                                    <option value="<?= $prov->id_prov ?>"><?= $prov->nama ?></option>
-                                                <?php endforeach ?>
-
-
-                                            </select>
+                                            <input type="file" name="foto_ktp" id="picture__input"class="picture___input">
                                         </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kota" id="Kota" tabindex="-1" aria-hidden="true">
-                                                <option selected disabled>Pilih Kota</option>
 
-                                            </select>
+                                        <div class="wrap-input100 validate-input" data-bs-validate="Password is required">
+                                            <label class="form-label mt-3">Upload Foto Profile</label>
+                                            <label class="picture" for="picture__input2" tabIndex="0">
+                                                <span class="picture__image2"></span>
+                                            </label>
+
+                                            <input type="file" name="foto_profil" id="picture__input2"class="picture___input">
                                         </div>
-                                    </div>
-                                                    
-                                        <div id="role-saksi"style="display:none">
+
+
+
+
+                                        <div id="role-admin" style="display:none">
+
+                                            <div class="form-group">
+                                                <select class="form-control select2-show-search form-select select2-hidden-accessible" name="provinsi" id="Provinsi" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled>Pilih Provinsi</option>
+                                                    <?php foreach ($provinsi as $prov) : ?>
+                                                        <option value="<?= $prov->id_prov ?>"><?= $prov->nama ?></option>
+                                                    <?php endforeach ?>
+
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kota" id="Kota" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled>Pilih Kota</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="role-saksi" style="display:none">
                                             <div class="form-group">
                                                 <select class="form-control select2-show-search form-select select2-hidden-accessible" name="kecamatan" id="Kecamatan" tabindex="-1" aria-hidden="true">
                                                     <option selected disabled>Pilih Kecamatan</option>
@@ -276,7 +336,7 @@
                                         </div>
                                     </form>
                                 </div>
-                              
+
                             </div>
                         </div>
                     </div>
@@ -341,9 +401,9 @@
             } else if (cekTps[0] == "tdk") {
                 $('#role-admin').show(100);
                 $('#role-saksi').hide(100);
-                
+
                 // console.log("halo")
-            }else{
+            } else {
                 $('#role-admin').hide(100);
                 $('#role-saksi').hide(100);
 
@@ -436,7 +496,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    $('#tps').html("")
+                    $('#tps').html("Pilih TPS")
                     if (response.messages != null) {
                         var option = $(`<option disabled>Data Tps Kosong</option>`); // Membuat elemen baru
                         $('#tps').append(option)
@@ -450,6 +510,64 @@
 
             });
         })
+
+
+        const inputFile = document.querySelector("#picture__input");
+        const inputFile2 = document.querySelector("#picture__input2");
+        const pictureImage = document.querySelector(".picture__image");
+        const pictureImage2 = document.querySelector(".picture__image2");
+        // const pictureImageTxt = "Choose an image";
+          pictureImage.innerHTML = "Pilih Foto Ktp";
+          pictureImage2.innerHTML = "Pilih Foto Profile";
+
+    inputFile.addEventListener("change", function(e) {
+        const inputTarget = e.target;
+        const file = inputTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function(e) {
+                const readerTarget = e.target;
+
+                const img = document.createElement("img");
+                img.src = readerTarget.result;
+                img.classList.add("picture__img");
+
+                pictureImage.innerHTML = "";
+                pictureImage.appendChild(img);
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            pictureImage.innerHTML = "Pilih Foto Ktp";
+        }
+    });
+
+    inputFile2.addEventListener("change", function(e) {
+        const inputTarget = e.target;
+        const file = inputTarget.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function(e) {
+                const readerTarget = e.target;
+
+                const img = document.createElement("img");
+                img.src = readerTarget.result;
+                img.classList.add("picture__img");
+
+                pictureImage2.innerHTML = "";
+                pictureImage2.appendChild(img);
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            pictureImage2.innerHTML = "Pilih Foto Profile";
+        }
+    });
+
     </script>
 </body>
 
