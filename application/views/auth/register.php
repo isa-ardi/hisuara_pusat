@@ -203,11 +203,11 @@
                                             <select class="form-control select2-show-search form-select select2-hidden-accessible" name="role" id="role" tabindex="-1" aria-hidden="true">
                                                 <option selected>Pilih Role</option>
                                                 <option value="tps|8">Saksi</option>
-                                                <option value="tdk|1">Admin</option>
                                                 <option value="tdk|16">Enumerator</option>
-                                                <!-- <option value="tdk|3">Auditor</option>
-                                                <option value="tdk|9">Rekapitulator</option> -->
+                                                <option value="tdk|9">Rekapitulator</option>
                                                 <option value="tps|14">Relawan</option>
+                                                <option value="tdk|1">Admin</option>
+                                                <!-- <option value="tdk|3">Auditor</option>  -->
                                             </select>
                                         </div>
 
