@@ -194,7 +194,6 @@
                                                         <?php endforeach; ?>
                                                     </ul>
                                                 <?php endif; ?>
-
                                                 <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="alert" aria-label="Close"> X </button>
                                             </div>
                                         <?php endif; ?>
