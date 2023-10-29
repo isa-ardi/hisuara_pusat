@@ -204,7 +204,7 @@
                                                 <option value="tps|8">Saksi</option>
                                                 <option value="tdk|16">Enumerator</option>
                                                 <option value="tdk|9">Rekapitulator</option>
-                                                <option value="tps|14">Relawan</option>
+                                                <option value="tps|14">Relawan Tps</option>
                                                 <option value="tdk|1">Admin</option>
                                                 <!-- <option value="tdk|3">Auditor</option>  -->
                                             </select>
